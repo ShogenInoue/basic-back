@@ -1,10 +1,10 @@
 const net = require('net');
-const { parseTlsClientHello } = require('read-tls-client-hello');
+const { readTlsClientHello } = require('read-tls-client-hello');
 
 const proxyServer = net.createServer((clientSocket) => {
   clientSocket.once('data', (initalData) => {
     try {
-      const parsedData = parseTlsClientHello(initalData);
+      const parsedData = readTlsClientHello(initalData);
       const serversName = parsedData.serverName;
 
       const backendSocket = net.connect(443, serversName, () => {
