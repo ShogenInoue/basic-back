@@ -9,15 +9,15 @@ const proxyServer = net.createServer((clientSocket) => {
 
       const backendSocket = net.connect(443, serversName, () => {
         autoPiping(clientSocket, backendSocket, initalData);
-        });
+      });
       backendSocket.on('error', (err) => {
         console.error(err);
-        clientSocket.destory();
+        clientSocket.destroy();
       });
     } catch (error) {
       console.error(error.message);
-      clientSocket.destory();
-    };
+      clientSocket.destroy();
+    }
       
   });
 });
@@ -30,11 +30,11 @@ function autoPiping(client, backend, hello) {
 
   client.on('error', (err) => {
     console.error(err);
-    client.destory();
+    client.destroy();
   });
   backend.on('error', (err) => {
     console.error(err);
-    backend.destory();
+    backend.destroy();
   });
 }
 
