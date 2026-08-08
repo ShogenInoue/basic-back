@@ -11,7 +11,7 @@ const proxyServer = net.createServer((clientSocket) => {
         autoPiping(clientSocket, backendSocket, initalData);
         });
       backendSocket.on('error', (err) => {
-        console.error((err));
+        console.error(err);
         clientSocket.destory();
       });
     } catch (error) {
