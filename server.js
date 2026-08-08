@@ -2,12 +2,12 @@ const net = require('net');
 const { readTlsClientHello, getExtensionData  } = require('read-tls-client-hello');
 
 const proxyServer = net.createServer( async (clientSocket) => {
+    console.log("New Client Connected!!!!")
     try {
       const parsedData = await readTlsClientHello(clientSocket);
       const sniData = getExtensionData(parsedData, 'sni');
       const serversName = sniData ? sniData.serverName : null;
-        console.log('Extracted server name:', serversName);  // ← Add this
-
+        console.log('Extracted server name:', serversName); 
         if (!serversName) {
       console.error('No server name found');
       clientSocket.destroy();
@@ -33,7 +33,7 @@ function autoPiping(client, backend) {
 
   client.pipe(backend);
   backend.pipe(client);
-
+    console.log("resgo");
   client.on('error', (err) => {
     console.error(err);
     client.destroy();
