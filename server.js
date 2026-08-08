@@ -8,7 +8,7 @@ const proxyServer = net.createServer( async (clientSocket) => {
       const serversName = sniData ? sniData.serverName : null;
 
       const backendSocket = net.connect(443, serversName, () => {
-        autoPiping(clientSocket, backendSocket, initalData);
+        autoPiping(clientSocket, backendSocket);
       });
       backendSocket.on('error', (err) => {
         console.error(err);
@@ -22,8 +22,8 @@ const proxyServer = net.createServer( async (clientSocket) => {
   });
 });
 
-function autoPiping(client, backend, hello) {
-  backend.write(hello);
+function autoPiping(client, backend) {
+
 
   client.pipe(backend);
   backend.pipe(client);
