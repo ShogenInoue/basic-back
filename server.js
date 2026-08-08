@@ -1,11 +1,11 @@
 const net = require('net');
-const { readTlsClientHello } = require('read-tls-client-hello');
+const { readTlsClientHello, getExtensionData  } = require('read-tls-client-hello');
 
-const proxyServer = net.createServer((clientSocket) => {
-  clientSocket.once('data', (initalData) => {
+const proxyServer = net.createServer( async (clientSocket) => {
     try {
-      const parsedData = readTlsClientHello(initalData);
-      const serversName = parsedData.serverName;
+      const parsedData = await readTlsClientHello(clientSocket);
+      const sniData = getExtensionData(clientHello, 'sni');
+      const serversName = sniData ? sniData.serverName : null;
 
       const backendSocket = net.connect(443, serversName, () => {
         autoPiping(clientSocket, backendSocket, initalData);
