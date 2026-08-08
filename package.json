@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/ShogenInoue/basic-back#readme",
   "dependencies": {
+    "express": "^5.2.1",
     "read-tls-client-hello": "^2.0.0"
   }
 }
