@@ -7,7 +7,7 @@ const proxyServer = net.createServer((clientSocket) => {
       const parsedData = parseTLSClientHello(initalData);
       const serversName = parsedData.serverName;
 
-      const backendSocket = net.connect(443, serversName () =>{
+      const backendSocket = net.connect(443, serversName, () => {
         autoPiping(clientSocket, backendSocket, initalData);
         });
       backendSocket.on('error', (err) => {
