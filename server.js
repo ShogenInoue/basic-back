@@ -6,6 +6,7 @@ const proxyServer = net.createServer( async (clientSocket) => {
       const parsedData = await readTlsClientHello(clientSocket);
       const sniData = getExtensionData(parsedData, 'sni');
       const serversName = sniData ? sniData.serverName : null;
+        console.log('Extracted server name:', serversName);  // ← Add this
 
         if (!serversName) {
       console.error('No server name found');
